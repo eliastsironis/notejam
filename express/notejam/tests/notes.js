@@ -9,7 +9,12 @@ var db = require('../db');
 var config = require('./config')
 var app = require('../app');
 
-app.listen(config.port);
+if(!module.require.main){
+  app.listen(3000, () =>
+    console.log('app listening on port'),
+  );
+}
+
 
 before(function(done) {
   db.createTables(function() {

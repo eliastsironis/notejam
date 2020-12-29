@@ -11,6 +11,7 @@ var expressValidator = require('express-validator');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
+
 var users = require('./routes/users');
 var pads = require('./routes/pads');
 var notes = require('./routes/notes');
@@ -26,7 +27,7 @@ app.set('view engine', 'jade');
 app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
 app.use(cookieParser());
 app.use(session({cookie: { maxAge: 60000 }, secret: 'secret'}));
@@ -34,6 +35,7 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 // DB configuration
 var sqlite3 = require('sqlite3').verbose();
